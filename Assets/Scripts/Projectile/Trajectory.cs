@@ -2,11 +2,11 @@
 
 public class Trajectory : MonoBehaviour
 {
-	[SerializeField] protected Transform dotsParent;	// Parent of all dots
-	[SerializeField] protected Transform dotPrefab;		// Dot prefab to clone
-	[SerializeField] protected Transform target;		// Target of object
-	[SerializeField] protected int dotsNumber;			// Amount of dots
-	[SerializeField] protected float dotSpacing;		
+	[SerializeField] protected Transform _dotsParent;	// Parent of all dots
+	[SerializeField] protected Transform _dotPrefab;		// Dot prefab to clone
+	[SerializeField] protected Transform _target;		// Target of object
+	[SerializeField] protected int _dotsNumber;			// Amount of dots
+	[SerializeField] protected float _dotSpacing;		
 
 	private Transform[] _dotsList;		// All dots
 
@@ -20,12 +20,12 @@ public class Trajectory : MonoBehaviour
 
 	// Initializes dots on start
 	private void PrepareDots() {
-		_dotsList = new Transform[dotsNumber];
+		_dotsList = new Transform[_dotsNumber];
 
 
-		for (int i = 0; i < dotsNumber; i++) {
-			_dotsList[i] = Instantiate(dotPrefab, null);
-			_dotsList[i].parent = dotsParent.transform;
+		for (int i = 0; i < _dotsNumber; i++) {
+			_dotsList[i] = Instantiate(_dotPrefab, null);
+			_dotsList[i].parent = _dotsParent.transform;
 			_dotsList[i].gameObject.SetActive(true);
 
 		}
@@ -33,7 +33,7 @@ public class Trajectory : MonoBehaviour
 
 	// Updates positions of dots acc to Force vector starting with ball position
 	public void UpdateDots(Vector3 ballPos, Vector3 forceApplied) {
-		float timeStamp = dotSpacing;
+		float timeStamp = _dotSpacing;
 		bool hideDot = false;
 		foreach (Transform dot in _dotsList) {
 			Vector3 dotPos;
@@ -52,10 +52,10 @@ public class Trajectory : MonoBehaviour
 			dot.gameObject.SetActive(!hideDot);
 			
 			//
-			timeStamp += dotSpacing;
+			timeStamp += _dotSpacing;
 		}
 
-		target.gameObject.SetActive(hideDot);
+        _target.gameObject.SetActive(hideDot);
 	}
 
 	// Checks if dot collide with object with "Ground" tag
@@ -65,17 +65,17 @@ public class Trajectory : MonoBehaviour
 			// Adjusting position of target
 			Vector3 pos = sphereCenter;
 			pos.y = coll[0].transform.position.y + coll[0].bounds.size.y / 2 + 0.01f;
-			target.position = pos;
+            _target.position = pos;
 			return true;
 		}
 		return false;
 	}
 
 	public void Show() {
-		dotsParent.gameObject.SetActive(true);
+        _dotsParent.gameObject.SetActive(true);
 	}
 
 	public void Hide() {
-		dotsParent.gameObject.SetActive(false);
+        _dotsParent.gameObject.SetActive(false);
 	}
 }

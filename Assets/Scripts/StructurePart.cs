@@ -5,16 +5,15 @@ using UnityEngine;
 public class StructurePart : MonoBehaviour
 {
     public bool isActivated;
-    private Rigidbody rb;
-    //private float forceMultiplier = 200f;
+    private Rigidbody _rb;
     private void Awake()
     {
-        rb = GetComponent<Rigidbody>();
+        _rb = GetComponent<Rigidbody>();
     }
 
     public void ActivatePart()
     {
-        rb.isKinematic = false;
+        _rb.isKinematic = false;
         isActivated = true;
     }
     private void OnCollisionExit(Collision collision)
@@ -25,9 +24,6 @@ public class StructurePart : MonoBehaviour
             if (!neighborPart.isActivated) 
             {
                 neighborPart.ActivatePart();
-                //Vector3 force = (collision.transform.position - transform.position).normalized * forceMultiplier;
-                //collision.rigidbody.AddForce(force);
-                
             }
             
         }

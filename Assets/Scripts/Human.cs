@@ -5,8 +5,8 @@ using UnityEngine;
 public class Human : MonoBehaviour
 {
     private Rigidbody _rb;
-    public float explosionForce = 1000f;  // Patlama etkisi kuvveti
-    public float explosionRadius = 5f;  // Patlama etkisi yarýçapý
+    public float explosionForce = 1000f;  
+    public float explosionRadius = 5f;  
     private void Start()
     {
         _rb = GetComponent<Rigidbody>();
@@ -21,13 +21,12 @@ public class Human : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         StructurePart part = collision.gameObject.GetComponent<StructurePart>();
+        ExplosiveCube explosiveCube = collision.gameObject.GetComponent<ExplosiveCube>();
         if (part != null)
         {
             if (!part.isActivated)
             {
                 part.ActivatePart();
-               
-
             }
             Vector3 explosionPos = collision.contacts[0].point;
             Collider[] colliders = Physics.OverlapSphere(explosionPos, explosionRadius);
@@ -39,6 +38,10 @@ public class Human : MonoBehaviour
                     rb.AddExplosionForce(explosionForce, explosionPos, explosionRadius);
                 }
             }
+        }
+        else if (explosiveCube != null)
+        {
+            explosiveCube.Explosion(0.2f);
         }
     }
 }
