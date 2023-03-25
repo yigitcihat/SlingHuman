@@ -14,7 +14,6 @@ public class ExplosiveCube : MonoBehaviour
     private float _expTime = 0.1f;
     private Rigidbody _rb;
     private BoxCollider _boxCollider;
-    private Tween _tween;
 
     private void Awake()
     {
@@ -33,8 +32,15 @@ public class ExplosiveCube : MonoBehaviour
         Exploded = true;
         _rb.isKinematic = false;
         originalSize = _boxCollider.size;
+        if (_boxCollider == null)  yield return null;
+      
         Vector3 targetSize = originalSize * ColliderGrowthRate;
-        _tween = DOTween.To(() => _boxCollider.size, x => { if (!_boxCollider) { _boxCollider.size = x; }}, targetSize, 1f);
+        for (int i = 0; i < targetSize.x; i++)
+        {
+            yield return new WaitForSeconds(0.01f);
+            _boxCollider.size += Vector3.one * Time.deltaTime * 20;
+        }
+       
     }
 
     private void OnCollisionEnter(Collision other)
@@ -66,6 +72,11 @@ public class ExplosiveCube : MonoBehaviour
 
     private void OnDestroy()
     {
-        _tween.Kill();
+        StopCoroutine(ExplosionCoroutine(_expTime));
+    }
+
+    public void Destroy()
+    {
+        Destroy(gameObject);
     }
 }

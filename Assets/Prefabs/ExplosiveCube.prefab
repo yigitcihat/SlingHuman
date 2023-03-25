@@ -129,8 +129,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93e311d64033f054cb34091716b8fb7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  exploded: 0
-  explosionForce: 25
-  explosionRadius: 1
-  colliderGrowthRate: 1
-  colliderGrowthDuration: 0.5
+  Exploded: 0
+  ExplosionForce: 20
+  ExplosionRadius: 0.5
+  ColliderGrowthRate: 1
+  ColliderGrowthDuration: 0.1

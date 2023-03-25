@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StructurePart : MonoBehaviour
+public class StructurePart : MonoBehaviour, IDropeable
 {
     public bool isActivated;
     private Rigidbody _rb;
@@ -28,5 +28,8 @@ public class StructurePart : MonoBehaviour
             
         }
     }
-
+    public void Destroy()
+    {
+        Destroy(gameObject);
+    }
 }

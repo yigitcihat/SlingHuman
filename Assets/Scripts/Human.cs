@@ -2,15 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Human : MonoBehaviour
+public class Human : MonoBehaviour, IDropeable
 {
     private Rigidbody _rb;
+    private Animator _animator;
+    private bool _isOneTime;
+    [SerializeField] private bool isFirstHuman;
     public float explosionForce = 1000f;  
     public float explosionRadius = 5f;  
     private void Start()
     {
         _rb = GetComponent<Rigidbody>();
+        _animator = GetComponent<Animator>();
         _rb.isKinematic = true;
+        if (isFirstHuman)
+        {
+            _animator.SetTrigger("Stay");
+        }
     }
 
     public void Push(Vector3 force)
@@ -22,6 +30,7 @@ public class Human : MonoBehaviour
     {
         StructurePart part = collision.gameObject.GetComponent<StructurePart>();
         ExplosiveCube explosiveCube = collision.gameObject.GetComponent<ExplosiveCube>();
+        
         if (part != null)
         {
             if (!part.isActivated)
@@ -38,10 +47,25 @@ public class Human : MonoBehaviour
                     rb.AddExplosionForce(explosionForce, explosionPos, explosionRadius);
                 }
             }
+            if (!_isOneTime)
+            {
+                _animator.SetTrigger("Die");
+                _isOneTime= true;
+            }
+           
         }
         else if (explosiveCube != null)
         {
             explosiveCube.Explosion(0.2f);
+            if (!_isOneTime)
+            {
+                _animator.SetTrigger("Die");
+                _isOneTime = true;
+            }
         }
+    }
+    public void Destroy()
+    {
+        Destroy(gameObject);
     }
 }
