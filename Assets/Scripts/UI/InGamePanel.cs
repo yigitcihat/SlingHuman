@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class InGamePanel : Panel
 {
-
+ 
     bool isLevelStarted;
     public bool IsLevelStarted { get { return isLevelStarted; } set { isLevelStarted = value; } }
-
+    
     private void OnEnable()
     {
         if (Managers.Instance == null)
@@ -25,6 +26,4 @@ public class InGamePanel : Panel
         EventManager.OnOpenWinPanel.RemoveListener(HidePanel);
         EventManager.OnOpenFailPanel.RemoveListener(HidePanel);
     }
-
-
 }

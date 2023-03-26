@@ -19,7 +19,7 @@ public class RestartButton : MonoBehaviour
     public void Restart()
     {
         panel.HidePanel();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        
+        LevelManager.Instance.RestartLevel();
+
     }
 }

@@ -61,6 +61,7 @@ public class ExplosiveCube : MonoBehaviour
                 Rigidbody rb = hit.GetComponent<Rigidbody>();
                 if (rb != null)
                 {
+                    rb.transform.SetParent(null);
                     rb.AddExplosionForce(ExplosionForce, explosionPos, ExplosionRadius);
                 }
             }

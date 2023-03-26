@@ -10,13 +10,13 @@ using UnityEngine.SceneManagement;
 public class Level
 {
     public string name;
-    public int buildIndex;
+    [HideInInspector] public int buildIndex;
 }
 public class LevelManager : Singleton<LevelManager>
 {
 
     public Level[] levels;
-    public int currentLevelIndex = 0;
+    private int currentLevelIndex = 0;
     bool isLevelStarted;
     public bool IsLevelStarted { get { return isLevelStarted; } set { isLevelStarted = value; } }
 
@@ -25,7 +25,7 @@ public class LevelManager : Singleton<LevelManager>
     public UnityEvent OnLevelStart = new UnityEvent();
     [HideInInspector]
     public UnityEvent OnLevelFinish = new UnityEvent();
-    
+
 
     public void LoadLevel(int index)
     {
@@ -33,15 +33,25 @@ public class LevelManager : Singleton<LevelManager>
         {
             SceneManager.LoadScene(levels[index].buildIndex);
             currentLevelIndex = index;
+           
+            
         }
     }
 
     public void LoadNextLevel()
     {
         int nextLevelIndex = currentLevelIndex + 1;
+        int levelIndex = PlayerPrefs.GetInt(PlayerPrefKeys.FakeLevel, 1);
+        levelIndex++;
+        PlayerPrefs.SetInt(PlayerPrefKeys.FakeLevel, levelIndex);
         if (nextLevelIndex < levels.Length)
         {
             LoadLevel(nextLevelIndex);
+        }
+        else
+        {
+            LoadLevel(currentLevelIndex);
+            
         }
     }
     public void StartLevel()

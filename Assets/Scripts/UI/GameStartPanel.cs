@@ -29,8 +29,8 @@ public class GameStartPanel : Panel
     public override void ShowPanel()
     {
         base.ShowPanel();
-       
-        LevelDisplayText.SetText("Level " + PlayerPrefs.GetInt(PlayerPrefKeys.FakeLevel, 1));
+        int fakeLevel = PlayerPrefs.GetInt(PlayerPrefKeys.FakeLevel, 1);
+        LevelDisplayText.text =  "Level " + fakeLevel;
     }
     public override void HidePanel()
     {
@@ -43,10 +43,5 @@ public class GameStartPanel : Panel
         EventManager.OnLevelStart.Invoke();
     }
 
-    private void SetFakeLevel()
-    {
-        int fakeLevel = PlayerPrefs.GetInt(PlayerPrefKeys.FakeLevel, 1);
-        fakeLevel++;
-        PlayerPrefs.SetInt(PlayerPrefKeys.FakeLevel, fakeLevel);
-    }
+    
 }

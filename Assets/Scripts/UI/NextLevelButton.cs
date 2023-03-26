@@ -18,8 +18,8 @@ public class NextLevelButton : MonoBehaviour
     public void LoadNextLevel()
     {
         panel.HidePanel();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-       
+        LevelManager.Instance.LoadNextLevel();
+
 
     }
 }
