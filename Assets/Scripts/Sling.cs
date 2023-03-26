@@ -18,19 +18,32 @@ public class Sling : MonoBehaviour
     private Human _human;
     private Rigidbody _humanRb;
     private Animator humanAnimator;
+    private bool isLevelStart;
+    private void OnEnable()
+    {
+        EventManager.OnLevelStart.AddListener(() => isLevelStart = true);
+    }
+    private void OnDisable()
+    {
+        EventManager.OnLevelStart.RemoveListener(() => isLevelStart = true);
 
+    }
     private void Start()
     {
         _slingBantFirstPos = transform.localPosition;
         _human = _humanPos.GetComponentInChildren<Human>();
         humanAnimator = _human.GetComponent<Animator>();
         _humanRb = _human.GetComponent<Rigidbody>();
-        Spawn();
+        NewHumanGettingPosition();
     }
 
     private void Update()
     {
-        ControlSwipe();
+        if (isLevelStart) 
+        {
+            ControlSwipe();
+        }
+        
     }
 
     private void ControlSwipe()
@@ -68,15 +81,15 @@ public class Sling : MonoBehaviour
                 _human = null;
                 humanAnimator.SetTrigger("Thrown");
                 transform.localPosition = _slingBantFirstPos;
-                Invoke("Spawn", 0.5f);
-
+                Invoke("NewHumanGettingPosition", 0.5f);
+                EventManager.OnHumanThrowed.Invoke();
 
                 _trajectory.Hide();
             }
         }
     }
 
-    public void Spawn()
+    public void NewHumanGettingPosition()
     {
         if (_humanPos.childCount > 0 || AllHumans.Count == 0) return;
 

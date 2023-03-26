@@ -10,16 +10,17 @@ public class StructurePartCounter : MonoBehaviour
     private void Start()
     {
         TotalStructurePartCount = TargetPlatform.GetComponentsInChildren<IDropeable>().Length;
+        EventManager.OnTotalStructurePartNotify.Invoke(TotalStructurePartCount);
     }
 
     private void OnTriggerExit(Collider other)
     {
         IDropeable dropeable= other.GetComponent<IDropeable>();
         if (dropeable == null) return;
-
+        EventManager.OnStructurePartDroped.Invoke();
         TotalStructurePartCount--;
         dropeable.Destroy();
-        Debug.Log(TotalStructurePartCount);
+       
        
     }
 

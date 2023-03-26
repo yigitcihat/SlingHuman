@@ -42,6 +42,7 @@ public class Human : MonoBehaviour, IDropeable
             foreach (Collider hit in colliders)
             {
                 Rigidbody rb = hit.GetComponent<Rigidbody>();
+                hit.transform.SetParent(null);
                 if (rb != null)
                 {
                     rb.AddExplosionForce(explosionForce, explosionPos, explosionRadius);
@@ -57,6 +58,7 @@ public class Human : MonoBehaviour, IDropeable
         else if (explosiveCube != null)
         {
             explosiveCube.Explosion(0.2f);
+            explosiveCube.transform.SetParent(null);
             if (!_isOneTime)
             {
                 _animator.SetTrigger("Die");
