@@ -52,7 +52,7 @@ public class LevelProgress : MonoBehaviour
         ProgressText.text =  "%" + slider.value;
         if (progress >= 90 && !isOneTime )
         {
-            winPanel.SetTexts(progress.ToString());
+            
             StartCoroutine(OpenWinPanel());
             isOneTime = true;
         }
@@ -62,6 +62,7 @@ public class LevelProgress : MonoBehaviour
         yield return new WaitForSeconds(3f);
         if (!isFail)
         {
+            winPanel.SetTexts(Mathf.Clamp(progress,0,100).ToString());
             EventManager.OnOpenWinPanel.Invoke();
         }
        
