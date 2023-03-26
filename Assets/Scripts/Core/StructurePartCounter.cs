@@ -13,12 +13,13 @@ public class StructurePartCounter : MonoBehaviour
         EventManager.OnTotalStructurePartNotify.Invoke(TotalStructurePartCount);
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         IDropeable dropeable= other.GetComponent<IDropeable>();
         if (dropeable == null) return;
         EventManager.OnStructurePartDroped.Invoke();
         TotalStructurePartCount--;
+        PoolingSystem.Instance.InstantiateAPS("DropWater", other.transform.position + new Vector3(0,0,0));
         dropeable.Destroy();
        
        

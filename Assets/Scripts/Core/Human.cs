@@ -48,7 +48,7 @@ public class Human : MonoBehaviour, IDropeable
                     rb.AddExplosionForce(explosionForce, explosionPos, explosionRadius);
                 }
             }
-            if (!_isOneTime)
+            if (!_isOneTime && transform.parent == null)
             {
                 _animator.SetTrigger("Die");
                 _isOneTime= true;
@@ -59,7 +59,7 @@ public class Human : MonoBehaviour, IDropeable
         {
             explosiveCube.Explosion(0.2f);
             explosiveCube.transform.SetParent(null);
-            if (!_isOneTime)
+            if (!_isOneTime && transform.parent == null)
             {
                 _animator.SetTrigger("Die");
                 _isOneTime = true;

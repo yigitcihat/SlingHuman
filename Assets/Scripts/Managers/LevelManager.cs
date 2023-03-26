@@ -31,6 +31,7 @@ public class LevelManager : Singleton<LevelManager>
     {
         if (index >= 0 && index < levels.Length)
         {
+            OnLevelFinish.Invoke();
             SceneManager.LoadScene(levels[index].buildIndex);
             currentLevelIndex = index;
            

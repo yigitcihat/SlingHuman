@@ -257,8 +257,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1.5842576, z: 1}
+  m_Center: {x: 0, y: 0.2921274, z: 0}
 --- !u!23 &214377791
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -791,6 +791,7 @@ GameObject:
   - component: {fileID: 889761770}
   - component: {fileID: 889761768}
   - component: {fileID: 889761771}
+  - component: {fileID: 889761772}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -813,8 +814,6 @@ MonoBehaviour:
   levels:
   - name: Level_1
     buildIndex: 0
-  - name: Level_2
-    buildIndex: 1
   OnLevelStart:
     m_PersistentCalls:
       m_Calls: []
@@ -848,6 +847,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ba0fa4ee6ada8e4dbd9560371dbe4ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &889761772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 889761766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96c004f6f962c0b4e848d7834d42fb71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SourceObjects:
+  - ID: DropWater
+    SourcePrefab: {fileID: 196758, guid: e2550dae06524a94bbc4bcdf375a88b9, type: 3}
+    MinNumberOfObject: 0
+    AllowGrow: 1
+    AutoDestroy: 1
+    clones: []
+  - ID: Explotion
+    SourcePrefab: {fileID: 1473089736959414, guid: cb9bf8f7ab7299344a48e3eb96d6a266, type: 3}
+    MinNumberOfObject: 0
+    AllowGrow: 1
+    AutoDestroy: 1
+    clones: []
+  DefaultCount: 10
 --- !u!1 &890182685
 GameObject:
   m_ObjectHideFlags: 0
@@ -1145,63 +1170,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2c959e44e1b39340ba5c782cddaeb6d, type: 3}
---- !u!1 &1242971279 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4037930269091394517, guid: 4b639aac88e6c964f839dd8676587db3, type: 3}
-  m_PrefabInstance: {fileID: 2089976383}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &1242971288
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1242971279}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 5, y: 5, z: 0.1}
-  m_Center: {x: 0, y: 0, z: 2.27}
---- !u!65 &1242971289
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1242971279}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.1, y: 5, z: 5}
-  m_Center: {x: 2.39, y: 0, z: 0}
---- !u!65 &1242971290
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1242971279}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.1, y: 5, z: 5}
-  m_Center: {x: -2.39, y: 0, z: 0}
---- !u!65 &1242971291
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1242971279}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 5, y: 5, z: 0.1}
-  m_Center: {x: 0, y: 0, z: -2.39}
 --- !u!1 &1271684717
 GameObject:
   m_ObjectHideFlags: 0
@@ -1326,10 +1294,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1537028522}
     m_Modifications:
-    - target: {fileID: 560304889, guid: 4b639aac88e6c964f839dd8676587db3, type: 3}
-      propertyPath: m_Interpolate
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 1242971287, guid: 4b639aac88e6c964f839dd8676587db3, type: 3}
       propertyPath: TargetPlatform
       value: 
@@ -1383,28 +1347,12 @@ PrefabInstance:
       value: Sea
       objectReference: {fileID: 0}
     - target: {fileID: 8043357765438936906, guid: 4b639aac88e6c964f839dd8676587db3, type: 3}
-      propertyPath: m_Size.x
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8043357765438936906, guid: 4b639aac88e6c964f839dd8676587db3, type: 3}
       propertyPath: m_Size.y
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8043357765438936906, guid: 4b639aac88e6c964f839dd8676587db3, type: 3}
-      propertyPath: m_Size.z
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8043357765438936906, guid: 4b639aac88e6c964f839dd8676587db3, type: 3}
-      propertyPath: m_Center.x
-      value: 0
+      value: 0.018257827
       objectReference: {fileID: 0}
     - target: {fileID: 8043357765438936906, guid: 4b639aac88e6c964f839dd8676587db3, type: 3}
       propertyPath: m_Center.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8043357765438936906, guid: 4b639aac88e6c964f839dd8676587db3, type: 3}
-      propertyPath: m_Center.z
-      value: 0
+      value: -0.040871084
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b639aac88e6c964f839dd8676587db3, type: 3}

@@ -65,7 +65,7 @@ public class ExplosiveCube : MonoBehaviour
                     rb.AddExplosionForce(ExplosionForce, explosionPos, ExplosionRadius);
                 }
             }
-
+            PoolingSystem.Instance.InstantiateAPS("Explotion",transform.position);
             Destroy(gameObject, _expTime);
         }
     }
