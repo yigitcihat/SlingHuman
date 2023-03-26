@@ -11,7 +11,8 @@ public class EventManager
     public static UnityEvent OnStructurePartDroped = new UnityEvent();
     public static UnityEvent OnHumanThrowed = new UnityEvent();
     public static TotalStructurePartNotifyEvent OnTotalStructurePartNotify = new TotalStructurePartNotifyEvent();
-
+    public static TotalHumanCountNotifyEvent OnTotalHumanCountNotify = new TotalHumanCountNotifyEvent();
 
     public class TotalStructurePartNotifyEvent : UnityEvent<int> { }
+    public class TotalHumanCountNotifyEvent : UnityEvent<int> { }
 }

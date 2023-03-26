@@ -12,6 +12,7 @@ public class LevelProgress : MonoBehaviour
     public TextMeshProUGUI CurrentLevelText;
     public TextMeshProUGUI TargetLevelText;
     private int totalStructurePart;
+    private int totalHuman;
     private int progress;
     private bool isOneTime;
     private bool isFail;
@@ -35,14 +36,18 @@ public class LevelProgress : MonoBehaviour
         EventManager.OnTotalStructurePartNotify.AddListener(SetStructureCount);
         EventManager.OnStructurePartDroped.AddListener(ProgressIncrease);
         EventManager.OnOpenFailPanel.AddListener(FailLevel);
-
+        EventManager.OnTotalHumanCountNotify.AddListener(SetHumanCount);
+        EventManager.OnHumanThrowed.AddListener(SetShotLeftInfo);
     }
     private void OnDisable()
     {
         EventManager.OnTotalStructurePartNotify.RemoveListener(SetStructureCount);
         EventManager.OnStructurePartDroped.RemoveListener(ProgressIncrease);
         EventManager.OnOpenFailPanel.RemoveListener(FailLevel);
-       
+        EventManager.OnTotalHumanCountNotify.RemoveListener(SetHumanCount);
+        EventManager.OnHumanThrowed.RemoveListener(SetShotLeftInfo);
+
+
 
     }
     private void ProgressIncrease()
@@ -76,5 +81,23 @@ public class LevelProgress : MonoBehaviour
     {
         failPanel.SetTexts(progress.ToString()); 
         isFail = true;
+    }
+
+    private void SetHumanCount(int humanCount)
+    {
+        totalHuman = humanCount;
+        InfoText.text = totalHuman.ToString() + " Shot Left";
+    }
+    private void SetShotLeftInfo()
+    {
+        totalHuman--;
+        if (totalHuman == 0)
+        {
+            InfoText.text= "No More Shots";
+        }
+        else
+        {
+            InfoText.text = totalHuman.ToString() + " Shot Left";
+        }
     }
 }

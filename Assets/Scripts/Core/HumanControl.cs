@@ -10,6 +10,7 @@ public class HumanControl : MonoBehaviour
     private void Start()
     {
         totalHuman = transform.childCount +1;
+        EventManager.OnTotalHumanCountNotify.Invoke(totalHuman);
     }
 
     private void OnEnable()
