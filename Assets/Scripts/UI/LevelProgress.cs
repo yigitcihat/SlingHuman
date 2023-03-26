@@ -59,7 +59,7 @@ public class LevelProgress : MonoBehaviour
     }
     private IEnumerator OpenWinPanel()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
         if (!isFail)
         {
             EventManager.OnOpenWinPanel.Invoke();
